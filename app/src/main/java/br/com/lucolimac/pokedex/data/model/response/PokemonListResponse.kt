@@ -18,7 +18,7 @@ internal data class PokemonListResponse(
         @SerializedName("name") val name: String, @SerializedName("url") val url: String
     ) {
         fun toEntity(): PokemonList.PokemonResume {
-            return PokemonList.PokemonResume(this.name, this.url)
+            return PokemonList.PokemonResume(this.name, this.url.split('/').last().toInt())
         }
     }
 }

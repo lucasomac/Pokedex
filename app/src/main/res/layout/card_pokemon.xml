@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="pokemonResume"
+            type="br.com.lucolimac.pokedex.domain.entity.PokemonList.PokemonResume" />
+    </data>
+
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView
         android:layout_width="match_parent"
         android:layout_height="108dp"
@@ -19,6 +26,7 @@
             android:layout_marginTop="4dp"
             android:gravity="end|center_vertical"
             android:lineSpacingExtra="0sp"
+            android:text="@{pokemonResume.number}"
             android:textAppearance="@style/pokemonNumberStyle"
             tools:text="#304" />
 
@@ -40,6 +48,7 @@
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:lineSpacingExtra="1sp"
+                android:text="@{pokemonResume.name}"
                 android:textAppearance="@style/pokemonNameStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +58,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivPokemonImage"
+            imageUrl="@{pokemonResume.imageUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"

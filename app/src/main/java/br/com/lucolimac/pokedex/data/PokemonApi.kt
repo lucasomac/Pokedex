@@ -1,6 +1,5 @@
 package br.com.lucolimac.pokedex.data
 
-import android.content.Context
 import android.util.Log
 import br.com.lucolimac.pokedex.data.service.PokedexService
 import br.com.lucolimac.pokedex.data.util.Constants.POKE_API_HOST
@@ -13,7 +12,7 @@ internal object PokemonApi {
     private const val OK_HTTP = "POKEMON-LOG"
 
 
-    fun provideOkHttpClient(context: Context): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor { Log.i(OK_HTTP, it) }.apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
