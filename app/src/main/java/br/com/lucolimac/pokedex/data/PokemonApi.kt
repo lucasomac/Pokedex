@@ -1,7 +1,6 @@
 package br.com.lucolimac.pokedex.data
 
 import android.util.Log
-import br.com.lucolimac.pokedex.data.service.PokedexService
 import br.com.lucolimac.pokedex.data.util.Constants.POKE_API_HOST
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,9 +21,5 @@ internal object PokemonApi {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder().baseUrl(POKE_API_HOST).client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create()).build()
-    }
-
-    fun provideUserService(retrofit: Retrofit): PokedexService {
-        return retrofit.create(PokedexService::class.java)
     }
 }

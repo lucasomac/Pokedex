@@ -9,16 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.lucolimac.pokedex.R
 import br.com.lucolimac.pokedex.databinding.CardPokemonBinding
 import br.com.lucolimac.pokedex.domain.entity.PokemonList
-import br.com.lucolimac.pokedex.ui.utils.BindingExtensions.executeWithAction
 
 internal class PokemonListAdapter :
     PagingDataAdapter<PokemonList.PokemonResume, PokemonListAdapter.PokemonListViewHolder>(
         DiffCallback
     ) {
-    override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonListViewHolder {
         val binding = DataBindingUtil.inflate<CardPokemonBinding>(
             LayoutInflater.from(parent.context), R.layout.card_pokemon, parent, false
@@ -26,12 +21,16 @@ internal class PokemonListAdapter :
         return PokemonListViewHolder(binding)
     }
 
+    override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(it) }
+    }
+
+
     internal class PokemonListViewHolder(private val binding: CardPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemonResume: PokemonList.PokemonResume) {
-            binding.executeWithAction {
-
-            }
+            binding.pokemonResume = pokemonResume
+            binding.executePendingBindings()
         }
     }
 

@@ -4,33 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import br.com.lucolimac.pokedex.databinding.FragmentFirstBinding
-import br.com.lucolimac.pokedex.ui.presentation.viewmodel.ListPokemonViewModel
+import androidx.navigation.fragment.findNavController
+import br.com.lucolimac.pokedex.R
+import br.com.lucolimac.pokedex.databinding.FragmentPokemonBinding
 
-class FirstFragment : Fragment() {
+class PokemonFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
-    private val viewModel: ListPokemonViewModel by viewModels()
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentPokemonBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pokemon, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+
+        binding.buttonSecond.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
     }
 
     override fun onDestroyView() {
