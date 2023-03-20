@@ -3,11 +3,15 @@
 
     <data>
 
-        <import type="androidx.recyclerview.widget.RecyclerView" />
+        <import type="br.com.lucolimac.pokedex.ui.presentation.viewmodel.ListPokemonViewModel" />
 
         <variable
             name="viewModel"
             type="br.com.lucolimac.pokedex.ui.presentation.viewmodel.ListPokemonViewModel" />
+
+        <variable
+            name="adapter"
+            type="br.com.lucolimac.pokedex.ui.component.PokemonListAdapter" />
 
     </data>
 
@@ -21,16 +25,28 @@
         tools:context=".ui.presentation.fragment.PokedexFragment">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPokedex"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="4dp"
             android:layout_marginBottom="4dp"
             android:background="@color/white"
+            app:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:spanCount="3"
             tools:itemCount="300"
             tools:listitem="@layout/card_pokemon" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

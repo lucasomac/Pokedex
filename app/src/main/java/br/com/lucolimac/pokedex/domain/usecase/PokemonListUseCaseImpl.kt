@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 internal class PokemonListUseCaseImpl constructor(
-    private val exampleRepository: PokedexRepository,
+    private val pokedexRepository: PokedexRepository,
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : PokemonListUseCase {
 
     override operator fun invoke(offset: Int, limit: Int): Flow<Result<PokemonList, String>> {
         return flow {
-            emit(exampleRepository.getPokemonList(offset, limit))
+            emit(pokedexRepository.getPokemonList(offset, limit))
         }.flowOn(coroutineDispatcher)
     }
 }
