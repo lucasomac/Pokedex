@@ -3,28 +3,31 @@ package br.com.lucolimac.pokedex.domain.data.source
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import br.com.lucolimac.pokedex.domain.entity.PokemonList
-import br.com.lucolimac.pokedex.ui.presentation.state.ListPokemonState
-import retrofit2.HttpException
-import java.io.IOException
+import br.com.lucolimac.pokedex.domain.usecase.PokemonListUseCase
+import br.com.lucolimac.pokedex.domain.util.Result
 
 internal class PokemonResumePagingSource(
-    private val data: ListPokemonState.Success,
-    private val offset: Int,
-    private val limit: Int
+    private val useCase: PokemonListUseCase, private val offset: Int, private val limit: Int
 ) : PagingSource<Int, PokemonList.PokemonResume>() {
+    private lateinit var data: Result<PokemonList, String>
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonList.PokemonResume> {
-
         val currentPage = params.key ?: offset
-        return try {
-            LoadResult.Page(
-                data = data.pokemonList.listOfPokemonResume,
-                prevKey = if (data.pokemonList.previous.isNullOrEmpty()) null else currentPage.minus(limit),
-                nextKey = if (data.pokemonList.next.isNullOrEmpty()) null else currentPage.plus(limit)
-            )
-        } catch (exception: IOException) {
-            return LoadResult.Error(exception)
-        } catch (exception: HttpException) {
-            return LoadResult.Error(exception)
+        useCase(currentPage, limit).collect {
+            data = it
+        }
+        return when (data) {
+            is Result.Success -> {
+                val list = (data as Result.Success<PokemonList>).data
+                LoadResult.Page(
+                    data = list.listOfPokemonResume,
+                    prevKey = if (list.previous.isNullOrEmpty()) null else currentPage.minus(
+                        limit
+                    ),
+                    nextKey = if (list.next.isNullOrEmpty()) null else currentPage.plus(limit)
+                )
+            }
+            is Result.Error -> LoadResult.Invalid()
+            is Result.Failure -> LoadResult.Error((data as Result.Failure).throwable!!)
         }
     }
 

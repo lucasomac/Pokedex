@@ -20,7 +20,7 @@ internal data class PokemonListResponse(
         fun toEntity(): PokemonList.PokemonResume {
             return PokemonList.PokemonResume(
                 this.name,
-                this.url.split("pokemon/").last().replace("/", "").toInt()
+                this.url.split("pokemon/").last().replace("/", "")
             )
         }
     }

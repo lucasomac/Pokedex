@@ -12,7 +12,7 @@
 
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView
         android:layout_width="match_parent"
-        android:layout_height="108dp"
+        android:layout_height="128dp"
         android:background="@drawable/background_card_pokemon"
         android:elevation="3dp"
         app:strokeColor="@android:color/transparent"
@@ -26,8 +26,8 @@
             android:layout_marginTop="4dp"
             android:gravity="end|center_vertical"
             android:lineSpacingExtra="0sp"
-            android:text="@{pokemonResume.number}"
             android:textAppearance="@style/pokemonNumberStyle"
+            app:pokemonNumber="@{pokemonResume.number}"
             tools:text="#304" />
 
 
@@ -48,7 +48,7 @@
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:lineSpacingExtra="1sp"
-                android:text="@{pokemonResume.name}"
+                app:pokemonName="@{pokemonResume.name}"
                 android:textAppearance="@style/pokemonNameStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:background="@drawable/background_pokemon_image"
             tools:srcCompat="@drawable/aron" />
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 </layout>

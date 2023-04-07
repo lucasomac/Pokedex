@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import br.com.lucolimac.pokedex.R
 import br.com.lucolimac.pokedex.databinding.FragmentPokedexBinding
 import br.com.lucolimac.pokedex.ui.component.PokemonListAdapter
+import br.com.lucolimac.pokedex.ui.component.Separator
 import br.com.lucolimac.pokedex.ui.presentation.viewmodel.ListPokemonViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,11 +29,10 @@ internal class PokedexFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
-        binding.adapter = pokemonListAdapter
-        binding.recyclerPokedex.adapter = pokemonListAdapter
-        lifecycleScope.launchWhenStarted {
-            viewModel.getListPokemon()
+        binding.apply {
+            viewModel = this@PokedexFragment.viewModel
+            separator = Separator(4)
+            adapter = pokemonListAdapter
         }
     }
 

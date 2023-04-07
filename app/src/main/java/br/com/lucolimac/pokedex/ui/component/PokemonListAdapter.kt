@@ -30,7 +30,6 @@ internal class PokemonListAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemonResume: PokemonList.PokemonResume) {
             binding.pokemonResume = pokemonResume
-            binding.executePendingBindings()
         }
     }
 
