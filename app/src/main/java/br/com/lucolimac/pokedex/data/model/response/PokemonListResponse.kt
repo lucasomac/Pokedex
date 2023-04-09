@@ -1,7 +1,7 @@
 package br.com.lucolimac.pokedex.data.model.response
 
 
-import br.com.lucolimac.pokedex.domain.entity.PokemonList
+import br.com.lucolimac.pokedex.domain.entity.Pokedex
 import com.google.gson.annotations.SerializedName
 
 internal data class PokemonListResponse(
@@ -10,17 +10,17 @@ internal data class PokemonListResponse(
     @SerializedName("previous") val previous: String?,
     @SerializedName("results") val results: List<PokemonResumeResponse>,
 ) {
-    fun toEntity(): PokemonList {
-        return PokemonList(previous, next, results.map { it.toEntity() })
+    fun toEntity(): Pokedex {
+        return Pokedex(previous, next, results.map { it.toEntity() })
     }
 
     data class PokemonResumeResponse(
         @SerializedName("name") val name: String, @SerializedName("url") val url: String
     ) {
-        fun toEntity(): PokemonList.PokemonResume {
-            return PokemonList.PokemonResume(
+        fun toEntity(): Pokedex.PokemonResume {
+            return Pokedex.PokemonResume(
                 this.name,
-                this.url.split("pokemon/").last().replace("/", "")
+                this.url.split("pokemon/").last().replace("/", "").toLong()
             )
         }
     }

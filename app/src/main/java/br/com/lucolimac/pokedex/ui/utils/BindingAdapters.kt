@@ -9,9 +9,10 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import br.com.lucolimac.pokedex.R
-import br.com.lucolimac.pokedex.domain.entity.PokemonList.PokemonResume
+import br.com.lucolimac.pokedex.domain.entity.Pokedex.PokemonResume
 import br.com.lucolimac.pokedex.ui.component.PokemonListAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
+import br.com.lucolimac.pokedex.ui.utils.StringExtensions.capitalize
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.formatPokemonNumber
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
@@ -61,18 +62,11 @@ internal fun RecyclerView.listData(
 }
 
 @BindingAdapter("pokemonNumber")
-internal fun MaterialTextView.pokemonNumber(pokemonNumber: String) {
-    this.text = pokemonNumber.formatPokemonNumber()
+internal fun MaterialTextView.pokemonNumber(pokemonNumber: Long) {
+    this.text = pokemonNumber.toString().formatPokemonNumber()
 }
 
 @BindingAdapter("pokemonName")
 internal fun MaterialTextView.pokemonName(pokemonName: String) {
-    this.text = pokemonName.replaceFirstChar {
-        if (it.isLowerCase()) it.titlecase(
-            Locale(
-                "pt",
-                "BR"
-            )
-        ) else it.toString()
-    }
+    this.text = pokemonName.capitalize()
 }

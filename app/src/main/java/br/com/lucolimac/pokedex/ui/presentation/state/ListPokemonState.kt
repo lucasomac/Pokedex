@@ -1,10 +1,10 @@
 package br.com.lucolimac.pokedex.ui.presentation.state
 
-import br.com.lucolimac.pokedex.domain.entity.PokemonList
+import br.com.lucolimac.pokedex.domain.entity.Pokedex
 
 internal sealed class ListPokemonState {
     internal data class Success constructor(
-        val pokemonList: PokemonList
+        val pokedex: Pokedex
     ) : ListPokemonState()
 
     internal class Error(val message: String) : ListPokemonState()

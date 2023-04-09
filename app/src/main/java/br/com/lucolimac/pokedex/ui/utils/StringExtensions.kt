@@ -1,5 +1,7 @@
 package br.com.lucolimac.pokedex.ui.utils
 
+import java.util.*
+
 internal object StringExtensions {
     fun String.formatPokemonNumber(): String {
         return when (this.length) {
@@ -13,5 +15,9 @@ internal object StringExtensions {
                 "#$this"
             }
         }
+    }
+
+    fun String.capitalize(): String {
+        return this.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
     }
 }

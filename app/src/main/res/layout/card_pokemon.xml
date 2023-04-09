@@ -7,7 +7,11 @@
 
         <variable
             name="pokemonResume"
-            type="br.com.lucolimac.pokedex.domain.entity.PokemonList.PokemonResume" />
+            type="br.com.lucolimac.pokedex.domain.entity.Pokedex.PokemonResume" />
+
+        <variable
+            name="pokemonClick"
+            type="br.com.lucolimac.pokedex.ui.component.PokedexOnClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -15,6 +19,7 @@
         android:layout_height="128dp"
         android:background="@drawable/background_card_pokemon"
         android:elevation="8dp"
+        android:onClick="@{() -> pokemonClick.onCardPokemonClick(pokemonResume.name)}"
         app:cardCornerRadius="16dp">
 
         <com.google.android.material.textview.MaterialTextView

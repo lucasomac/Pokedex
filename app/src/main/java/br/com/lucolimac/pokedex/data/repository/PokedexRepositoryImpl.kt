@@ -2,13 +2,13 @@ package br.com.lucolimac.pokedex.data.repository
 
 import br.com.lucolimac.pokedex.data.source.PokedexDataSource
 import br.com.lucolimac.pokedex.domain.entity.Pokemon
-import br.com.lucolimac.pokedex.domain.entity.PokemonList
+import br.com.lucolimac.pokedex.domain.entity.Pokedex
 import br.com.lucolimac.pokedex.domain.repository.PokedexRepository
 import br.com.lucolimac.pokedex.domain.util.Result
 
 internal class PokedexRepositoryImpl(private val pokedexDataSource: PokedexDataSource) :
     PokedexRepository {
-    override suspend fun getPokemonList(offset: Int, limit: Int): Result<PokemonList, String> {
+    override suspend fun getPokemonList(offset: Int, limit: Int): Result<Pokedex, String> {
         return try {
             val response = pokedexDataSource.getPokemonList(offset, limit)
             if (response.isSuccessful) {

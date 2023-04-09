@@ -3,17 +3,23 @@
 
     <data>
 
+        <import type="br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokedexViewModel" />
+
+        <import type="br.com.lucolimac.pokedex.ui.component.Separator" />
+
+        <import type="br.com.lucolimac.pokedex.ui.component.PokemonListAdapter" />
+
         <variable
             name="viewModel"
-            type="br.com.lucolimac.pokedex.ui.presentation.viewmodel.ListPokemonViewModel" />
+            type="PokedexViewModel" />
 
         <variable
             name="adapter"
-            type="br.com.lucolimac.pokedex.ui.component.PokemonListAdapter" />
+            type="PokemonListAdapter" />
 
         <variable
             name="separator"
-            type="br.com.lucolimac.pokedex.ui.component.Separator" />
+            type="Separator" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
