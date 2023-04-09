@@ -31,7 +31,7 @@ internal class PokedexFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             viewModel = this@PokedexFragment.viewModel
-            separator = Separator(4)
+            separator = Separator(8)
             adapter = pokemonListAdapter
         }
     }

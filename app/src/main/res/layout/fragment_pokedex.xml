@@ -22,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/primary_background"
         tools:context=".ui.presentation.fragment.PokedexFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -31,13 +30,12 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="4dp"
             android:layout_marginBottom="4dp"
-            android:background="@color/white"
-            app:pokeAdapter="@{adapter}"
+            app:context="@{context}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:listData="@{viewModel.pokemonList}"
-            app:context="@{context}"
+            app:pokeAdapter="@{adapter}"
             app:separator="@{separator}"
             app:spanCount="3"
             tools:itemCount="300"
@@ -47,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            app:isLoading="@{adapter}"
             app:context="@{context}"
+            app:isLoading="@{adapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
