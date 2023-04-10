@@ -13,7 +13,6 @@ internal class PokedexUseCaseImpl constructor(
     private val pokedexRepository: PokedexRepository,
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : PokedexUseCase {
-
     override operator fun invoke(offset: Int, limit: Int): Flow<Result<Pokedex, String>> {
         return flow {
             emit(pokedexRepository.getPokemonList(offset, limit))

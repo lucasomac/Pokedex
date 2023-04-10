@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-internal class PokemonUseCaseImpl(
+internal class PokemonUseCaseImpl constructor(
     private val pokedexRepository: PokedexRepository,
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : PokemonUseCase {

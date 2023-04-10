@@ -7,12 +7,12 @@ import br.com.lucolimac.pokedex.domain.usecase.PokedexUseCase
 import br.com.lucolimac.pokedex.domain.util.Result
 
 internal class PokemonResumePagingSource(
-    private val useCase: PokedexUseCase, private val offset: Int, private val limit: Int
+    private val pokedexUseCase: PokedexUseCase, private val offset: Int, private val limit: Int
 ) : PagingSource<Int, Pokedex.PokemonResume>() {
     private lateinit var data: Result<Pokedex, String>
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokedex.PokemonResume> {
         val currentPage = params.key ?: offset
-        useCase(currentPage, limit).collect {
+        pokedexUseCase(currentPage, limit).collect {
             data = it
         }
         return when (data) {

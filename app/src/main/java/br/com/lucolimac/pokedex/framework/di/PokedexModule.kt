@@ -7,10 +7,13 @@ import br.com.lucolimac.pokedex.data.source.PokedexDataSource
 import br.com.lucolimac.pokedex.domain.repository.PokedexRepository
 import br.com.lucolimac.pokedex.domain.usecase.PokedexUseCase
 import br.com.lucolimac.pokedex.domain.usecase.PokedexUseCaseImpl
+import br.com.lucolimac.pokedex.domain.usecase.PokemonUseCase
+import br.com.lucolimac.pokedex.domain.usecase.PokemonUseCaseImpl
 import br.com.lucolimac.pokedex.framework.data.source.PokedexDataSourceImpl
 import br.com.lucolimac.pokedex.ui.component.PokemonListAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
 import br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokedexViewModel
+import br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokemonViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
@@ -24,9 +27,11 @@ internal object PokedexModule {
         factory { provideRetrofit(get()) }
         factoryOf(::PokedexDataSourceImpl) { bind<PokedexDataSource>() }
         factoryOf(::PokedexRepositoryImpl) { bind<PokedexRepository>() }
-        factory { Dispatchers.IO }
         factoryOf(::PokedexUseCaseImpl) { bind<PokedexUseCase>() }
+        factoryOf(::PokemonUseCaseImpl) { bind<PokemonUseCase>() }
         viewModelOf(::PokedexViewModel)
+        viewModelOf(::PokemonViewModel)
         factoryOf(::PokemonListAdapter)
+        factory { Dispatchers.IO }
     }
 }
