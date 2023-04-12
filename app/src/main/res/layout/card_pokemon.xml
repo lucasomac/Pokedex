@@ -3,36 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-        android:layout_width="104dp"
-        android:layout_height="108dp"
+    <data>
+
+        <variable
+            name="pokemonResume"
+            type="br.com.lucolimac.pokedex.domain.entity.Pokedex.PokemonResume" />
+
+        <variable
+            name="pokemonClick"
+            type="br.com.lucolimac.pokedex.ui.component.PokedexOnClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
         android:background="@drawable/background_card_pokemon"
-        android:elevation="3dp"
-        app:strokeColor="@android:color/transparent"
-        app:strokeWidth="0.5dp">
+        android:elevation="8dp"
+        android:onClick="@{() -> pokemonClick.onCardPokemonClick(pokemonResume.name)}"
+        app:cardCornerRadius="16dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPokemonNumber"
+            style="@style/PokemonNumberStyle"
             android:layout_width="match_parent"
             android:layout_height="12dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="4dp"
             android:gravity="end|center_vertical"
             android:lineSpacingExtra="0sp"
-            android:textAppearance="@style/pokemonNumberStyle"
+            app:pokemonNumber="@{pokemonResume.number}"
             tools:text="#304" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/name"
-            android:layout_width="104dp"
+            android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_gravity="bottom"
             android:background="@drawable/background_pokemon_name"
-            app:cardCornerRadius="7dp">
+            app:cardCornerRadius="8dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvPokemonName"
+                style="@style/PokemonNameStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -40,20 +53,20 @@
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:lineSpacingExtra="1sp"
-                android:textAppearance="@style/pokemonNameStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:pokemonName="@{pokemonResume.name}"
                 tools:text="Aron" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivPokemonImage"
+            imageUrl="@{pokemonResume.imageUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:background="@drawable/background_pokemon_image"
             tools:srcCompat="@drawable/aron" />
-    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+    </androidx.cardview.widget.CardView>
 </layout>
