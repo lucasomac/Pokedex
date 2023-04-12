@@ -13,6 +13,7 @@ import br.com.lucolimac.pokedex.ui.component.PokedexOnClickListener
 import br.com.lucolimac.pokedex.ui.component.PokemonListAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
 import br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokedexViewModel
+import br.com.lucolimac.pokedex.ui.utils.StringExtensions.capitalize
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -46,6 +47,6 @@ internal class PokedexFragment : Fragment(), PokedexOnClickListener {
     }
 
     override fun onCardPokemonClick(pokemonName: String) {
-        findNavController().navigate(PokedexFragmentDirections.actionPokedexToPokemonFragment(pokemonName))
+        findNavController().navigate(PokedexFragmentDirections.actionPokedexToPokemonFragment(pokemonName.capitalize()))
     }
 }

@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import br.com.lucolimac.pokedex.domain.data.source.PokemonResumePagingSource
+import br.com.lucolimac.pokedex.domain.data.source.PokedexPagingSource
 import br.com.lucolimac.pokedex.domain.entity.Pokedex
 import br.com.lucolimac.pokedex.domain.usecase.PokedexUseCase
 import br.com.lucolimac.pokedex.domain.util.Constants.DEFAULT_SIZE_CONTENT_PAGE
@@ -28,7 +28,7 @@ internal class PokedexViewModel(
         return Pager(config = PagingConfig(
             pageSize = limit
         ), pagingSourceFactory = {
-            PokemonResumePagingSource(
+            PokedexPagingSource(
                 pokedexUseCase, offset, limit
             )
         }).flow.cachedIn(viewModelScope)

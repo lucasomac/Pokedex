@@ -2,6 +2,8 @@ package br.com.lucolimac.pokedex.ui.utils
 
 import android.content.Context
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +16,7 @@ import br.com.lucolimac.pokedex.ui.component.PokemonListAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.capitalize
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.formatPokemonNumber
+import br.com.lucolimac.pokedex.ui.utils.StringExtensions.getBackground
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -44,6 +47,11 @@ internal fun CircularProgressIndicator.isLoading(adapter: PokemonListAdapter, co
     }
 }
 
+@BindingAdapter("isLoading")
+internal fun CircularProgressIndicator.isLoading(isLoading: Boolean) {
+    this@isLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+}
+
 @BindingAdapter("pokeAdapter")
 internal fun RecyclerView.pokeAdapter(pokeAdapter: PokemonListAdapter) {
     this.adapter = pokeAdapter
@@ -69,4 +77,9 @@ internal fun MaterialTextView.pokemonNumber(pokemonNumber: Long) {
 @BindingAdapter("pokemonName")
 internal fun MaterialTextView.pokemonName(pokemonName: String) {
     this.text = pokemonName.capitalize()
+}
+
+@BindingAdapter("pokemonType", "context")
+internal fun ConstraintLayout.pokemonType(pokemonType: String?, context: Context) {
+    this.background = AppCompatResources.getDrawable(context, pokemonType.getBackground())
 }
