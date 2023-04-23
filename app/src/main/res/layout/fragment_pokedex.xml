@@ -7,7 +7,7 @@
 
         <import type="br.com.lucolimac.pokedex.ui.component.Separator" />
 
-        <import type="br.com.lucolimac.pokedex.ui.component.PokemonListAdapter" />
+        <import type="br.com.lucolimac.pokedex.ui.adapter.PokemonListAdapter" />
 
         <variable
             name="viewModel"
@@ -15,7 +15,7 @@
 
         <variable
             name="adapter"
-            type="PokemonListAdapter" />
+            type="br.com.lucolimac.pokedex.ui.adapter.PokemonListAdapter" />
 
         <variable
             name="separator"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:indeterminate="true"
             app:context="@{context}"
-            app:isLoading="@{adapter}"
+            app:isLoadingPage="@{adapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

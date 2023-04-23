@@ -9,25 +9,20 @@
 
         <import type="br.com.lucolimac.pokedex.ui.utils.StringExtensions" />
 
-        <variable
-            name="pokemon"
-            type="br.com.lucolimac.pokedex.domain.entity.Pokemon" />
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
             type="br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokemonViewModel" />
 
-        <variable
-            name="isLoading"
-            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:context="@{context}"
-        app:pokemonType="@{pokemon.types[0]}"
-        tolls:background="@color/type_dark">
+        app:pokemonType="@{viewModel.pokemon.types[0]}"
+        tolls:background="@color/type_fairy">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideCenterVertical"
@@ -67,7 +62,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/shapeableImageView"
-            imageUrl="@{pokemon.imageUrl}"
+            imageUrl="@{viewModel.pokemon.imageUrl}"
             android:layout_width="256dp"
             android:layout_height="256dp"
             app:layout_constraintBottom_toTopOf="@id/cardStats"
@@ -81,7 +76,7 @@
             android:layout_height="wrap_content"
             android:indeterminate="true"
             android:translationZ="90dp"
-            app:isLoading="@{isLoading}"
+            app:isLoading="@{viewModel.loading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

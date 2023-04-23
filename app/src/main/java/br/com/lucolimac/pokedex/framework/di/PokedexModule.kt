@@ -10,7 +10,7 @@ import br.com.lucolimac.pokedex.domain.usecase.PokedexUseCaseImpl
 import br.com.lucolimac.pokedex.domain.usecase.PokemonUseCase
 import br.com.lucolimac.pokedex.domain.usecase.PokemonUseCaseImpl
 import br.com.lucolimac.pokedex.framework.data.source.PokedexDataSourceImpl
-import br.com.lucolimac.pokedex.ui.component.PokemonListAdapter
+import br.com.lucolimac.pokedex.ui.adapter.PokemonListAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
 import br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokedexViewModel
 import br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokemonViewModel

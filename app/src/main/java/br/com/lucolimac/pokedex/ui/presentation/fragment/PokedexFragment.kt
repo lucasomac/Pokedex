@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.lucolimac.pokedex.R
 import br.com.lucolimac.pokedex.databinding.FragmentPokedexBinding
 import br.com.lucolimac.pokedex.ui.component.PokedexOnClickListener
-import br.com.lucolimac.pokedex.ui.component.PokemonListAdapter
+import br.com.lucolimac.pokedex.ui.adapter.PokemonListAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
 import br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokedexViewModel
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.capitalize

@@ -1,4 +1,4 @@
-package br.com.lucolimac.pokedex.ui.utils
+package br.com.lucolimac.pokedex.ui.adapter
 
 import android.content.Context
 import android.view.View
@@ -12,7 +12,6 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import br.com.lucolimac.pokedex.R
 import br.com.lucolimac.pokedex.domain.entity.Pokedex.PokemonResume
-import br.com.lucolimac.pokedex.ui.component.PokemonListAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.capitalize
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.formatPokemonNumber
@@ -27,21 +26,21 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 @BindingAdapter("separator")
-fun RecyclerView.separator(separator: Separator) {
+internal fun RecyclerView.separator(separator: Separator) {
     this.addItemDecoration(separator)
 }
 
 @BindingAdapter("imageUrl")
-fun ShapeableImageView.loadImage(url: String?) {
+internal fun ShapeableImageView.loadImage(url: String?) {
     if (url.isNullOrEmpty()) return
     Glide.with(this).load(url).placeholder(R.drawable.pokeball).into(this)
 }
 
-@BindingAdapter("isLoading", "context", requireAll = true)
-internal fun CircularProgressIndicator.isLoading(adapter: PokemonListAdapter, context: Context) {
+@BindingAdapter("isLoadingPage", "context", requireAll = true)
+internal fun CircularProgressIndicator.isLoadingPage(adapter: PokemonListAdapter, context: Context) {
     (context as LifecycleOwner).lifecycleScope.launch {
         adapter.loadStateFlow.collectLatest {
-            this@isLoading.visibility =
+            this@isLoadingPage.visibility =
                 if (it.refresh is LoadState.Loading) View.VISIBLE else View.GONE
         }
     }
