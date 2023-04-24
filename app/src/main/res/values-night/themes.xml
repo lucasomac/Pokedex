@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Pokedex" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-<!--        <item name="colorPrimary">@color/primary_background_dark</item>-->
+        <!--        <item name="colorPrimary">@color/primary_background_dark</item>-->
     </style>
 
     <style name="PokemonNumberStyle">
@@ -13,5 +13,10 @@
     <style name="PokemonNameStyle">
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">#F1F1F1</item>
+    </style>
+
+    <style name="PokemonTypeNameStyle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

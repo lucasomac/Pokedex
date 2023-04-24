@@ -15,7 +15,7 @@
 
         <variable
             name="adapter"
-            type="br.com.lucolimac.pokedex.ui.adapter.PokemonListAdapter" />
+            type="PokemonListAdapter" />
 
         <variable
             name="separator"
@@ -36,12 +36,12 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="4dp"
             android:layout_marginBottom="4dp"
+            app:adapter="@{adapter}"
             app:context="@{context}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:listData="@{viewModel.pokemonList}"
-            app:pokeAdapter="@{adapter}"
+            app:pageData="@{viewModel.pokemonList}"
             app:separator="@{separator}"
             app:spanCount="3"
             tools:itemCount="300"

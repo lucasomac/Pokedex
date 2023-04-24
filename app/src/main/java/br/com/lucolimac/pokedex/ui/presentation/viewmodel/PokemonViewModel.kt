@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 internal class PokemonViewModel(
@@ -27,18 +29,14 @@ internal class PokemonViewModel(
 
     fun getPokemonByName(pokemonName: String) {
         viewModelScope.launch {
-            _loading.emit(true)
-            pokemonUseCase(pokemonName).flowOn(Dispatchers.IO).collect {
-                when (it) {
-                    is Result.Success -> {
-                        _pokemon.emit(it.data)
+            pokemonUseCase(pokemonName).onStart { _loading.emit(true) }
+                .onCompletion { _loading.emit(false) }.flowOn(Dispatchers.IO).collect {
+                    when (it) {
+                        is Result.Success -> _pokemon.emit(it.data)
+                        is Result.Error -> _error.emit(it.data)
+                        else -> _error.emit(it.toString())
                     }
-                    is Result.Error -> _error.emit(it.data)
-
-                    else -> _error.emit(it.toString())
                 }
-            }
-            _loading.emit(false)
         }
     }
 }

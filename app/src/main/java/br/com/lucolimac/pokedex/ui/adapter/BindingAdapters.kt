@@ -3,7 +3,6 @@ package br.com.lucolimac.pokedex.ui.adapter
 import android.content.Context
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +16,7 @@ import br.com.lucolimac.pokedex.ui.utils.StringExtensions.capitalize
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.formatPokemonNumber
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.getBackground
 import com.bumptech.glide.Glide
+import com.google.android.material.circularreveal.cardview.CircularRevealCardView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textview.MaterialTextView
@@ -37,7 +37,9 @@ internal fun ShapeableImageView.loadImage(url: String?) {
 }
 
 @BindingAdapter("isLoadingPage", "context", requireAll = true)
-internal fun CircularProgressIndicator.isLoadingPage(adapter: PokemonListAdapter, context: Context) {
+internal fun CircularProgressIndicator.isLoadingPage(
+    adapter: PokemonListAdapter, context: Context
+) {
     (context as LifecycleOwner).lifecycleScope.launch {
         adapter.loadStateFlow.collectLatest {
             this@isLoadingPage.visibility =
@@ -51,21 +53,29 @@ internal fun CircularProgressIndicator.isLoading(isLoading: Boolean) {
     this@isLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
 }
 
-@BindingAdapter("pokeAdapter")
-internal fun RecyclerView.pokeAdapter(pokeAdapter: PokemonListAdapter) {
-    this.adapter = pokeAdapter
+@BindingAdapter("adapter")
+internal fun RecyclerView.adapter(adapter: RecyclerView.Adapter<*>?) {
+    adapter?.let {
+        this.adapter = it
+    }
 }
 
-@BindingAdapter("listData", "context")
+@BindingAdapter("pageData", "context")
 internal fun RecyclerView.listData(
-    listData: Flow<PagingData<PokemonResume>>, context: Context
+    pageData: Flow<PagingData<PokemonResume>>, context: Context
 ) {
     val adapter = this.adapter as PokemonListAdapter
     (context as LifecycleOwner).lifecycleScope.launch {
-        listData.collectLatest {
+        pageData.collectLatest {
             adapter.submitData(it)
         }
     }
+}
+
+@BindingAdapter("data")
+internal fun RecyclerView.data(data: List<String>) {
+    val adapter = this.adapter as BubblePokemonTypeAdapter
+    adapter.submitList(data)
 }
 
 @BindingAdapter("pokemonNumber")
@@ -79,6 +89,10 @@ internal fun MaterialTextView.pokemonName(pokemonName: String) {
 }
 
 @BindingAdapter("pokemonType", "context")
-internal fun ConstraintLayout.pokemonType(pokemonType: String?, context: Context) {
-    this.background = AppCompatResources.getDrawable(context, pokemonType.getBackground())
+internal fun View.pokemonType(pokemonType: String?, context: Context) {
+    if (this is CircularRevealCardView) {
+        this.setCardBackgroundColor(pokemonType.getBackground())
+    } else {
+        this.background = AppCompatResources.getDrawable(context, pokemonType.getBackground())
+    }
 }
