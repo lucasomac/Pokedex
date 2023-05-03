@@ -1,4 +1,4 @@
-package br.com.lucolimac.pokedex.ui.component
+package br.com.lucolimac.pokedex.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.lucolimac.pokedex.R
 import br.com.lucolimac.pokedex.databinding.CardPokemonBinding
 import br.com.lucolimac.pokedex.domain.entity.Pokedex
+import br.com.lucolimac.pokedex.ui.component.PokedexOnClickListener
 
 internal class PokemonListAdapter(private val pokedexOnClickListener: PokedexOnClickListener) :
     PagingDataAdapter<Pokedex.PokemonResume, PokemonListAdapter.PokemonListViewHolder>(

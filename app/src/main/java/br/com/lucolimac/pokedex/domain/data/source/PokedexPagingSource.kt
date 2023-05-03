@@ -6,7 +6,7 @@ import br.com.lucolimac.pokedex.domain.entity.Pokedex
 import br.com.lucolimac.pokedex.domain.usecase.PokedexUseCase
 import br.com.lucolimac.pokedex.domain.util.Result
 
-internal class PokemonResumePagingSource(
+internal class PokedexPagingSource(
     private val pokedexUseCase: PokedexUseCase, private val offset: Int, private val limit: Int
 ) : PagingSource<Int, Pokedex.PokemonResume>() {
     private lateinit var data: Result<Pokedex, String>

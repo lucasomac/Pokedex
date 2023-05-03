@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/pokemonFragment"
         android:name="br.com.lucolimac.pokedex.ui.presentation.fragment.PokemonFragment"
-        android:label="@string/pokemon_fragment_label"
+        android:label="{pokemonName}"
         tools:layout="@layout/fragment_pokemon">
 
         <action
