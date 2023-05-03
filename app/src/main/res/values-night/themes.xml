@@ -16,7 +16,9 @@
     </style>
 
     <style name="PokemonTypeNameStyle">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:paddingVertical">4dp</item>
     </style>
 </resources>

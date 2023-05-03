@@ -3,6 +3,7 @@ package br.com.lucolimac.pokedex.ui.adapter
 import android.content.Context
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -73,9 +74,14 @@ internal fun RecyclerView.listData(
 }
 
 @BindingAdapter("data")
-internal fun RecyclerView.data(data: List<String>) {
-    val adapter = this.adapter as BubblePokemonTypeAdapter
-    adapter.submitList(data)
+internal fun RecyclerView.data(data: List<String>?) {
+    if (this.adapter == null) {
+        val adapter = BubblePokemonTypeAdapter()
+        adapter.submitList(data?.map { it.capitalize() })
+    } else {
+        val adapter = this.adapter as BubblePokemonTypeAdapter
+        adapter.submitList(data?.map { it.capitalize() })
+    }
 }
 
 @BindingAdapter("pokemonNumber")
@@ -91,7 +97,7 @@ internal fun MaterialTextView.pokemonName(pokemonName: String) {
 @BindingAdapter("pokemonType", "context")
 internal fun View.pokemonType(pokemonType: String?, context: Context) {
     if (this is CircularRevealCardView) {
-        this.setCardBackgroundColor(pokemonType.getBackground())
+        this.setCardBackgroundColor(ContextCompat.getColor(context, pokemonType.getBackground()))
     } else {
         this.background = AppCompatResources.getDrawable(context, pokemonType.getBackground())
     }

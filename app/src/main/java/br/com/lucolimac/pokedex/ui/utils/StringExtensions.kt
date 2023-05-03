@@ -1,7 +1,7 @@
 package br.com.lucolimac.pokedex.ui.utils
 
 import br.com.lucolimac.pokedex.R
-import java.util.*
+import java.util.Locale
 
 internal object StringExtensions {
     fun String.formatPokemonNumber(): String {
@@ -9,9 +9,11 @@ internal object StringExtensions {
             1 -> {
                 "#00$this"
             }
+
             2 -> {
                 "#0$this"
             }
+
             else -> {
                 "#$this"
             }
@@ -27,7 +29,7 @@ internal object StringExtensions {
     }
 
     fun String?.getBackground(): Int {
-        return when (this) {
+        return when (this?.lowercase()) {
             "normal" -> R.color.type_normal
             "fighting" -> R.color.type_fighting
             "flying" -> R.color.type_flying

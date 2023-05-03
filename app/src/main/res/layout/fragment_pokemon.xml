@@ -73,7 +73,10 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="128dp"
                     android:orientation="horizontal"
+                    app:adapter="@{adapter}"
+                    app:data="@{viewModel.pokemon.types}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:separator="@{separator}"
                     tolls:itemCount="3"
                     tolls:listitem="@layout/bubble_pokemon_type" />
             </androidx.appcompat.widget.LinearLayoutCompat>
