@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tolls="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pokemonType"
+            type="String" />
+    </data>
+
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="32dp"
+        app:context="@{context}"
+        app:pokemonType="@{pokemonType}">
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/PokemonTypeNameStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="@{pokemonType}"
+            tolls:text="Grass" />
+    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+</layout>

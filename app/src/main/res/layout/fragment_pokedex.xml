@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -7,7 +9,7 @@
 
         <import type="br.com.lucolimac.pokedex.ui.component.Separator" />
 
-        <import type="br.com.lucolimac.pokedex.ui.component.PokemonListAdapter" />
+        <import type="br.com.lucolimac.pokedex.ui.adapter.PokemonListAdapter" />
 
         <variable
             name="viewModel"
@@ -22,9 +24,14 @@
             type="Separator" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <!--    <com.facebook.shimmer.ShimmerFrameLayout-->
+    <!--        android:id="@+id/container"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:isLoadingShimmer="@{adapter}"-->
+    <!--        app:context="@{context}">-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -36,12 +43,12 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="4dp"
             android:layout_marginBottom="4dp"
+            app:adapter="@{adapter}"
             app:context="@{context}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:listData="@{viewModel.pokemonList}"
-            app:pokeAdapter="@{adapter}"
+            app:pageData="@{viewModel.pokemonList}"
             app:separator="@{separator}"
             app:spanCount="3"
             tools:itemCount="300"
@@ -52,10 +59,11 @@
             android:layout_height="wrap_content"
             android:indeterminate="true"
             app:context="@{context}"
-            app:isLoading="@{adapter}"
+            app:isLoadingPage="@{adapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    </com.facebook.shimmer.ShimmerFrameLayout>-->
 </layout>

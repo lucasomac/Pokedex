@@ -1,3 +1,9 @@
 package br.com.lucolimac.pokedex.domain.entity
 
-internal data class Pokemon(private val name: String, private val imageUrl: String)
+import br.com.lucolimac.pokedex.domain.util.Constants
+
+internal data class Pokemon(
+    val name: String, val number: Int, val types: List<String>
+) {
+    val imageUrl: String = Constants.URL_BASE_IMAGE.format(number)
+}

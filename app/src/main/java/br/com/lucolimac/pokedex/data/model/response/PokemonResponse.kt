@@ -25,7 +25,7 @@ internal data class PokemonResponse(
     @SerializedName("weight") val weight: Int // 300
 ) {
     fun toEntity(): Pokemon {
-        return Pokemon(this.name, this.sprites.other.officialArtwork.frontDefault)
+        return Pokemon(this.name, this.id, this.types.map { it.type.name })
     }
 
     data class Ability(
