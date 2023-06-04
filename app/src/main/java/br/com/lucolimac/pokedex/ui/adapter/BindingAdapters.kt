@@ -2,6 +2,7 @@ package br.com.lucolimac.pokedex.ui.adapter
 
 import android.content.Context
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -18,7 +19,6 @@ import br.com.lucolimac.pokedex.ui.utils.StringExtensions.formatPokemonNumber
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.getBackground
 import com.bumptech.glide.Glide
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView
-import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.flow.Flow
@@ -32,7 +32,7 @@ internal fun RecyclerView.separator(separator: Separator) {
 }
 
 @BindingAdapter("imageUrl")
-internal fun ShapeableImageView.loadImage(url: String?) {
+internal fun ImageView.loadImage(url: String?) {
     if (url.isNullOrEmpty()) return
     Glide.with(this).load(url).placeholder(R.drawable.pokeball).into(this)
 }
