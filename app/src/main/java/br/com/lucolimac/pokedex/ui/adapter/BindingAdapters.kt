@@ -33,6 +33,7 @@ internal fun RecyclerView.separator(separator: Separator) {
 
 @BindingAdapter("imageUrl")
 internal fun ImageView.loadImage(url: String?) {
+
     if (url.isNullOrEmpty()) return
     Glide.with(this).load(url).placeholder(R.drawable.pokeball).into(this)
 }
