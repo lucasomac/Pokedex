@@ -26,7 +26,7 @@ jobs:
       - name: Upload lint report
         uses: actions/upload-artifact@v3
         with:
-          name: LintReport.html
+          name: LintReport
           path: app/build/reports/lint-results-debug.html
 
   build:
@@ -66,7 +66,7 @@ jobs:
           name: JacocoReport
           path: app/build/reports/jacoco/testDebugUnitTestCoverage/html/
   apk:
-    name: Debug apk
+    name: Debug
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -85,7 +85,7 @@ jobs:
           name: Pokedex
           path: app/build/outputs/apk/debug/app-debug.apk
   release:
-    name: Release APK
+    name: Release
     needs: apk
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
