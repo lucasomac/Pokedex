@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
-      - run: ./gradlew lint --stacktrace
+      - run: ./gradlew lint --stacktrace --warning-mode=all
       - uses: yutailang0119/action-android-lint@v3
         with:
           report-path: build/reports/*.html # Support glob patterns by https://www.npmjs.com/package/@actions/glob
@@ -41,9 +41,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew build --stacktrace
+        run: ./gradlew build --stacktrace --warning-mode=all
   test:
-    name: Tests
+    name: Test coverage
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -55,7 +55,7 @@ jobs:
           distribution: 'temurin'
           cache: gradle
       - name: test with Gradle
-        run: ./gradlew app:testDevDebugUnitTestCoverageVerification --stacktrace
+        run: ./gradlew testDebugUnitTestCoverageVerification --stacktrace --warning-mode=all
   apk:
     name: Debug apk
     needs: test
