@@ -78,7 +78,7 @@ jobs:
           distribution: 'temurin'
           cache: gradle
       - name: build APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew clean assembleDebug --stacktrace
       - name: Upload APK debug
         uses: actions/upload-artifact@v3
         with:
