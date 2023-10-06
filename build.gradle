@@ -6,6 +6,7 @@ buildscript {
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.3")
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jacoco:org.jacoco.core:0.8.9"
     }
     repositories {
         mavenCentral()

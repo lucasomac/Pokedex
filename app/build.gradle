@@ -5,6 +5,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+apply from: "$rootDir/jacoco.gradle"
 android {
     namespace 'br.com.lucolimac.pokedex'
     compileSdk 34
@@ -22,6 +23,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            testCoverageEnabled true
         }
     }
     compileOptions {

@@ -55,7 +55,7 @@ jobs:
           distribution: 'temurin'
           cache: gradle
       - name: test with Gradle
-        run: ./gradlew test --stacktrace
+        run: ./gradlew app:testDevDebugUnitTestCoverageVerification --stacktrace
   apk:
     name: Debug apk
     needs: test
