@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 1
+      #        with:
+      #          fetch-depth: 1
       - name: set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -42,6 +42,11 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build --stacktrace --warning-mode=all
+      - name: upload lint report
+        uses: actions/upload-artifact@v3
+        with:
+          name: LintReport.html
+          path: app/build/reports/lint-results-debug.html
   test:
     name: Test coverage
     needs: build
@@ -56,6 +61,11 @@ jobs:
           cache: gradle
       - name: test with Gradle
         run: ./gradlew testDebugUnitTestCoverageVerification --stacktrace --warning-mode=all
+      - name: upload lint report
+        uses: actions/upload-artifact@v3
+        with:
+          name: JacocoReport.html
+          path: app/build/reports/jacoco/testDebugUnitTestCoverage/html/index.html
   apk:
     name: Debug apk
     needs: test
