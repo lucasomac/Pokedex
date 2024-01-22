@@ -28,7 +28,6 @@ jobs:
         with:
           name: LintReport
           path: app/build/reports/lint-results-debug.html
-
   build:
     name: Build
     needs: lint
@@ -45,7 +44,6 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build --stacktrace --warning-mode=all
-
   test:
     name: Test coverage
     needs: build
