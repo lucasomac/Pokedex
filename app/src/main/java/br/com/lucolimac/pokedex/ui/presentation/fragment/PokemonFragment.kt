@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Text
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -38,6 +43,14 @@ class PokemonFragment : Fragment() {
         binding.apply {
             this.separator = this@PokemonFragment.separator
             adapter = bubblePokemonTypeAdapter
+            composeViewAttributes.setContent {
+                Row {
+                    Text(
+                        text = "10 Kilos",
+                        style = TextStyle(fontSize = 18.sp, textAlign = TextAlign.Center)
+                    )
+                }
+            }
         }
     }
 
