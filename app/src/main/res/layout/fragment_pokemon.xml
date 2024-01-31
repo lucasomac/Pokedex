@@ -79,6 +79,11 @@
                     app:separator="@{separator}"
                     tolls:itemCount="3"
                     tolls:listitem="@layout/bubble_pokemon_type" />
+
+                <androidx.compose.ui.platform.ComposeView
+                    android:id="@+id/composeViewAttributes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
 
