@@ -96,16 +96,16 @@ jobs:
           name: Pokedex
       - name: Create Release
         id: create_release
-        uses: ncipollo/release-action@latest
+        uses: ncipollo/release-action@v1.13.0
         with:
           artifacts: "Pokedex/app-debug.apk"
       - name: Upload Release APK
         id: upload_release_asset
-        uses: actions/upload-release-asset@latest
+        uses: alexellis/upload-assets@0.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: Pokedex/app-debug.apk
           asset_name: Pokedex.apk
           asset_content_type: application/zip
