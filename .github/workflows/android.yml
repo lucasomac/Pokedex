@@ -19,12 +19,12 @@ jobs:
           distribution: 'temurin'
           cache: gradle
       - run: ./gradlew lint --stacktrace --warning-mode=all
-      - uses: yutailang0119/action-android-lint@lastest
+      - uses: yutailang0119/action-android-lint@v3.1.0
         with:
           report-path: build/reports/*.html # Support glob patterns by https://www.npmjs.com/package/@actions/glob
         continue-on-error: false # If annotations contain error of severity, action-android-lint exit 1.
       - name: Upload lint report
-        uses: actions/upload-artifact@lastest
+        uses: actions/upload-artifact@v4.3.0
         with:
           name: LintReport
           path: app/build/reports/lint-results-debug.html
@@ -91,7 +91,7 @@ jobs:
       contents: write
     steps:
       - name: Download APK from build
-        uses: actions/download-artifact@latest
+        uses: actions/download-artifact@v4.1.1
         with:
           name: Pokedex
       - name: Create Release
