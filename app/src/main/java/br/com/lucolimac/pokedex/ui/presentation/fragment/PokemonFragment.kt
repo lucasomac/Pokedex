@@ -44,14 +44,14 @@ class PokemonFragment : Fragment() {
                 PokemonAttributesCard(
                     pokemonAttributes = listOf(
                         Attribute(
-                            R.drawable.weight, "65", "Width"
+                            R.drawable.weight, "69 Kg", "Width"
                         ),
                         Attribute(
                             R.drawable.straighten,
-                            "65",
+                            "65 m",
                             "Height"
                         ),
-                        Attribute(R.drawable.weight, "65", "Moves"),
+                        Attribute(R.drawable.weight, "Crow", "Moves"),
                     )
                 )
             }
