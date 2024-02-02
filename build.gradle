@@ -4,18 +4,20 @@ buildscript {
         kotlin_version = '1.9.22'
         navigation_version = '2.7.6'
         koin_version = '3.5.3'
+        jacoco_version = '0.8.11'
+        gradle_plugin_version = '8.2.2'
     }
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version")
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jacoco:org.jacoco.core:0.8.10"
+        classpath "org.jacoco:org.jacoco.core:$jacoco_version"
     }
     repositories {
         mavenCentral()
     }
 }
 plugins {
-    id 'com.android.application' version '8.2.2' apply false
-    id 'com.android.library' version '8.2.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.9.22' apply false
+    id 'com.android.application' version "$gradle_plugin_version" apply false
+    id 'com.android.library' version "$gradle_plugin_version" apply false
+    id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
 }

@@ -5,7 +5,8 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
-apply from: "$rootDir/jacoco.gradle"
+apply from: "$project.rootDir/jacoco.gradle"
+
 android {
     namespace 'br.com.lucolimac.pokedex'
     compileSdk 34
@@ -40,7 +41,7 @@ android {
         dataBinding true
         compose true
     }
-    composeOptions{
+    composeOptions {
         kotlinCompilerExtensionVersion '1.5.8'
     }
 }
