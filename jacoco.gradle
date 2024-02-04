@@ -1,7 +1,4 @@
 apply plugin: 'jacoco'
-jacoco {
-    toolVersion = "0.8.10"
-}
 project.afterEvaluate {
     if (android.hasProperty("applicationVariants")) {
         android.applicationVariants.all { variant -> createVariantCoverage(variant)
@@ -74,10 +71,10 @@ def createVariantCoverage(variant) {
                                               "$project.projectDir/src/main/kotlin",
                                               "$project.projectDir/src/${variantName}/kotlin"]))
 
-        getExecutionData().setFrom(files("${project.buildDir}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
+        getExecutionData().setFrom(files("${project.layout.buildDirectory}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
 
         doLast {
-            def m = new File("${project.buildDir}/reports/jacoco/${testTaskName}Coverage/html/index.html")
+            def m = new File("${project.layout.buildDirectory}/reports/jacoco/${testTaskName}Coverage/html/index.html")
                     .text =~ /Total[^%]*>(\d?\d?\d?%)/
             if (m) {
                 println "Test coverage: ${m[0][1]}"
@@ -112,6 +109,6 @@ def createVariantCoverage(variant) {
                                               "$project.projectDir/src/${variantName}/java",
                                               "$project.projectDir/src/main/kotlin",
                                               "$project.projectDir/src/${variantName}/kotlin"]))
-        getExecutionData().setFrom(files("${project.buildDir}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
+        getExecutionData().setFrom(files("${project.layout.buildDirectory}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
     }
 }
