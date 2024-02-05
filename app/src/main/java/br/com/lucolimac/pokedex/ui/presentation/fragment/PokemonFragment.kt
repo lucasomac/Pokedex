@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.Text
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import br.com.lucolimac.pokedex.R
+import br.com.lucolimac.pokedex.attribute.domain.entity.Attribute
+import br.com.lucolimac.pokedex.attribute.ui.cards.PokemonAttributesCard
 import br.com.lucolimac.pokedex.databinding.FragmentPokemonBinding
 import br.com.lucolimac.pokedex.ui.adapter.BubblePokemonTypeAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
@@ -44,12 +41,19 @@ class PokemonFragment : Fragment() {
             this.separator = this@PokemonFragment.separator
             adapter = bubblePokemonTypeAdapter
             composeViewAttributes.setContent {
-                Row {
-                    Text(
-                        text = "10 Kilos",
-                        style = TextStyle(fontSize = 18.sp, textAlign = TextAlign.Center)
+                PokemonAttributesCard(
+                    pokemonAttributes = listOf(
+                        Attribute(
+                            R.drawable.weight, "69 Kg", "Width"
+                        ),
+                        Attribute(
+                            R.drawable.straighten,
+                            "65 m",
+                            "Height"
+                        ),
+                        Attribute(R.drawable.weight, "Crow", "Moves"),
                     )
-                }
+                )
             }
         }
     }

@@ -2,29 +2,35 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feature/actions" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
 
 jobs:
   lint:
     name: Android Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
+      - uses: actions/checkout@v4.1.1
+      - run: echo "The ${{ github.repository }} repository has been cloned."
       - name: Setup JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
+      - run: echo "The workflow is now ready to test your code."
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - run: ./gradlew lint --stacktrace --warning-mode=all
-      - uses: yutailang0119/action-android-lint@v3
+      - uses: yutailang0119/action-android-lint@v3.1.0
         with:
           report-path: build/reports/*.html # Support glob patterns by https://www.npmjs.com/package/@actions/glob
         continue-on-error: false # If annotations contain error of severity, action-android-lint exit 1.
       - name: Upload lint report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.0
         with:
           name: LintReport
           path: app/build/reports/lint-results-debug.html
@@ -33,80 +39,132 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
+      - uses: actions/checkout@v4.1.1
+      - run: echo "The ${{ github.repository }} repository has been cloned."
       - name: Setup JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
+      - run: echo "The workflow is now ready to test your code."
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build --stacktrace --warning-mode=all
+      - run: echo "Build status report=${{ job.status }}."
   test:
     name: Test coverage
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: set up JDK 17
-        uses: actions/setup-java@v3
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
+      - uses: actions/checkout@v4.1.1
+      - run: echo "The ${{ github.repository }} repository has been cloned."
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
+      - run: echo "The workflow is now ready to test your code."
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - name: test with Gradle
         run: ./gradlew testDebugUnitTestCoverageVerification --stacktrace --warning-mode=all
       - name: Upload jacoco report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.0
         with:
           name: JacocoReport
           path: app/build/reports/jacoco/testDebugUnitTestCoverage/html/
-  apk:
+  debug:
     name: Debug
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
+      - uses: actions/checkout@v4.1.1
+      - run: echo "The ${{ github.repository }} repository has been cloned."
       - name: Setup JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
+      - run: echo "The workflow is now ready to test your code."
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - name: build APK
         run: ./gradlew clean assembleDebug --stacktrace
       - name: Upload APK debug
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.0
         with:
           name: Pokedex
           path: app/build/outputs/apk/debug/app-debug.apk
-  release:
-    name: Release
-    needs: apk
-    if: startsWith(github.ref, 'refs/tags/v')
+  assign:
+    name: Generate App Bundle signed
+    needs: debug
     runs-on: ubuntu-latest
     steps:
-      - name: Download APK from build
-        uses: actions/download-artifact@v1
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
+      - uses: actions/checkout@v4.1.1
+      - run: echo "The ${{ github.repository }} repository has been cloned."
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
         with:
-          name: Pokedex
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+      - run: echo "The workflow is now ready to test your code."
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Bundle 'release' with Gradle
+        run: ./gradlew bundleRelease --stacktrace --warning-mode=all
+      - name: Sign AAB
+        id: sign_aab
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE }}
+          alias: ${{ secrets.SIGNING_ALIAS }}
+          keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.SIGNING_ALIAS_PASSWORD }}
+      - run: echo "Build status report=${{ job.status }}."
+      - name: Upload App Bundle
+        uses: actions/upload-artifact@v4.3.0
+        with:
+          name: aab
+          path: ${{steps.sign_aab.outputs.signedReleaseFile}}
+  release:
+    name: Release App Bundle
+    needs: assign
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download AAB from build
+        uses: actions/download-artifact@v4.1.1
+        with:
+          name: aab
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-      - name: Upload Release APK
+          tag_name: Tag Name
+          release_name: Release Name
+      - name: Upload Release AAB
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: Pokedex/app-debug.apk
-          asset_name: Pokedex.apk
+          asset_path: aab/app-release.aab
+          asset_name: ${{ github.event.repository.name }}.aab
           asset_content_type: application/zip
+      - run: echo "Upload returned with status=${{ job.status }}."
