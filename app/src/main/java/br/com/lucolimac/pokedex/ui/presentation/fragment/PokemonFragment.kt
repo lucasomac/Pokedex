@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import br.com.lucolimac.pokedex.R
 import br.com.lucolimac.pokedex.attribute.domain.entity.Attribute
@@ -14,7 +15,9 @@ import br.com.lucolimac.pokedex.databinding.FragmentPokemonBinding
 import br.com.lucolimac.pokedex.ui.adapter.BubblePokemonTypeAdapter
 import br.com.lucolimac.pokedex.ui.component.Separator
 import br.com.lucolimac.pokedex.ui.presentation.viewmodel.PokemonViewModel
+import br.com.lucolimac.pokedex.ui.utils.StringExtensions.capitalize
 import br.com.lucolimac.pokedex.ui.utils.StringExtensions.deCapitalize
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -40,20 +43,30 @@ class PokemonFragment : Fragment() {
         binding.apply {
             this.separator = this@PokemonFragment.separator
             adapter = bubblePokemonTypeAdapter
-            composeViewAttributes.setContent {
-                PokemonAttributesCard(
-                    pokemonAttributes = listOf(
-                        Attribute(
-                            R.drawable.weight, "69 Kg", "Width"
-                        ),
-                        Attribute(
-                            R.drawable.straighten,
-                            "65 m",
-                            "Height"
-                        ),
-                        Attribute(R.drawable.weight, "Crow", "Moves"),
-                    )
-                )
+            lifecycleScope.launch {
+                viewModel?.pokemon?.collect {
+                    composeViewAttributes.setContent {
+                        if (it != null) {
+                            PokemonAttributesCard(
+                                pokemonAttributes = listOf(
+                                    Attribute(
+                                        R.drawable.weight, "${it.weight} Kg", "Width"
+                                    ),
+                                    Attribute(
+                                        R.drawable.straighten, "${it.height} m", "Height"
+                                    ),
+                                    Attribute(
+                                        R.drawable.weight,
+                                        it.moves.subList(0, 2).map { it.capitalize() }.toString()
+                                            .replace("[", "")
+                                            .replace("]", "").replace(", ", "\n"),
+                                        "Moves"
+                                    ),
+                                )
+                            )
+                        }
+                    }
+                }
             }
         }
     }

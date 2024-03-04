@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,6 +25,7 @@ fun PokemonAttributesCard(pokemonAttributes: List<Attribute>) {
                     modifier = Modifier
                         .border(1.dp, Color.Gray)
                         .width(1.dp)
+                        .height(96.dp)
                         .fillMaxHeight()
                 )
                 PokemonAttribute(pokemonAttributes[it])
