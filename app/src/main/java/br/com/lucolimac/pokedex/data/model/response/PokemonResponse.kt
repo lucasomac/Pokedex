@@ -1,6 +1,8 @@
 package br.com.lucolimac.pokedex.data.model.response
 
 
+import br.com.lucolimac.pokedex.core.Extensions.metricalConversion
+import br.com.lucolimac.pokedex.core.Extensions.pastaConversion
 import br.com.lucolimac.pokedex.domain.entity.Pokemon
 import com.google.gson.annotations.SerializedName
 
@@ -25,7 +27,14 @@ internal data class PokemonResponse(
     @SerializedName("weight") val weight: Int // 300
 ) {
     fun toEntity(): Pokemon {
-        return Pokemon(this.name, this.id, this.types.map { it.type.name })
+        return Pokemon(
+            this.name,
+            this.id,
+            this.types.map { it.type.name },
+            this.moves.map { it.move.name },
+            this.weight.pastaConversion(1),
+            this.height.metricalConversion(1)
+        )
     }
 
     data class Ability(
