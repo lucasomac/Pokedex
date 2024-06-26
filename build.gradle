@@ -4,9 +4,9 @@ buildscript {
         kotlin_version = '1.9.22'
         navigation_version = '2.7.7'
         koin_version = '3.5.6'
-        compose_boom_version = '2024.05.00'
+        compose_boom_version = '2024.06.00'
         jacoco_version = '0.8.11'
-        gradle_plugin_version = '8.4.0'
+        gradle_plugin_version = '8.5.0'
     }
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version")
