@@ -5,7 +5,7 @@ buildscript {
         navigation_version = '2.7.7'
         koin_version = '3.5.6'
         compose_boom_version = '2024.06.00'
-        jacoco_version = '0.8.11'
+        jacoco_version = '0.8.12'
         gradle_plugin_version = '8.5.0'
     }
     dependencies {

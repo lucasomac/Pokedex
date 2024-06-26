@@ -5,7 +5,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
-apply from: "$project.rootDir/jacoco.gradle"
+apply from: '../jacoco.gradle'
 
 android {
     namespace 'br.com.lucolimac.pokedex'
@@ -28,6 +28,7 @@ android {
         debug {
             enableUnitTestCoverage true
             enableAndroidTestCoverage true
+            testCoverageEnabled true
         }
     }
     compileOptions {
