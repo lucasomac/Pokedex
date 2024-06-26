@@ -27,6 +27,7 @@ class PokemonFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            viewModel = this@PokemonFragment.viewModel
             this.separator = this@PokemonFragment.separator
             adapter = bubblePokemonTypeAdapter
             lifecycleScope.launch {
