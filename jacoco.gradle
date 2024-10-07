@@ -21,6 +21,7 @@ ext.excludes = ['**/databinding/*Binding.*',
                 '**/Manifest*.*',
                 '**/*Test*.*',
                 'android/**/*.*',
+                '**/ui',
                 // butterKnife
                 '**/*$ViewInjector*.*',
                 '**/*$ViewBinder*.*',
