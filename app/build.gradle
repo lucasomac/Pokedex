@@ -83,8 +83,14 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
     debugImplementation 'androidx.compose.ui:ui-tooling'
-
+    // Tests
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
+    testImplementation "io.mockk:mockk-android:$mockk_version"
+    testImplementation "io.mockk:mockk-agent:$mockk_version"
+    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
+    androidTestImplementation "io.mockk:mockk-agent:$mockk_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    testImplementation "com.tngtech.archunit:archunit-junit4:$archunit_version"
 }
