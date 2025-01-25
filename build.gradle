@@ -32,16 +32,16 @@ buildscript {
         archunit_version = '1.3.0'
     }
     dependencies {
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version")
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jacoco:org.jacoco.core:$jacoco_version"
+        classpath(libs.androidx.navigation.safe.args.gradle.plugin)
+        classpath libs.kotlin.gradle.plugin
+        classpath libs.org.jacoco.core
     }
     repositories {
         mavenCentral()
     }
 }
 plugins {
-    id "com.android.application" version "8.7.0" apply false
-    id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
-    id 'org.jetbrains.kotlin.plugin.compose' version "$kotlin_version" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
 }
