@@ -73,7 +73,7 @@ def createVariantCoverage(variant) {
         }
 
         def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir, excludes: project.excludes)
-        def kotlinClasses = fileTree(dir: "${buildDir}/tmp/kotlin-classes/${variantName}", excludes: project.excludes)
+        def kotlinClasses = fileTree(dir: "${layout.buildDirectory.get()}/tmp/kotlin-classes/${variantName}", excludes: project.excludes)
         getClassDirectories().setFrom(files([javaClasses, kotlinClasses]))
 
         getSourceDirectories().setFrom(files(["$project.projectDir/src/main/java",
@@ -81,10 +81,10 @@ def createVariantCoverage(variant) {
                                               "$project.projectDir/src/main/kotlin",
                                               "$project.projectDir/src/${variantName}/kotlin"]))
 
-        getExecutionData().setFrom(files("${project.buildDir}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
+        getExecutionData().setFrom(files("${layout.buildDirectory.get()}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
 
         doLast {
-            def m = new File("${project.buildDir}/reports/jacoco/${testTaskName}Coverage/html/index.html")
+            def m = new File("${layout.buildDirectory.get()}/reports/jacoco/${testTaskName}Coverage/html/index.html")
                     .text =~ /Total[^%]*>(\d?\d?\d?%)/
             if (m) {
                 println "Test coverage: ${m[0][1]}"
@@ -113,12 +113,12 @@ def createVariantCoverage(variant) {
             }
         }
         def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir, excludes: project.excludes)
-        def kotlinClasses = fileTree(dir: "${buildDir}/tmp/kotlin-classes/${variantName}", excludes: project.excludes)
+        def kotlinClasses = fileTree(dir: "${layout.buildDirectory.get()}/tmp/kotlin-classes/${variantName}", excludes: project.excludes)
         getClassDirectories().setFrom(files([javaClasses, kotlinClasses]))
         getSourceDirectories().setFrom(files(["$project.projectDir/src/main/java",
                                               "$project.projectDir/src/${variantName}/java",
                                               "$project.projectDir/src/main/kotlin",
                                               "$project.projectDir/src/${variantName}/kotlin"]))
-        getExecutionData().setFrom(files("${project.buildDir}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
+        getExecutionData().setFrom(files("${layout.buildDirectory.get()}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
     }
 }
