@@ -13,12 +13,11 @@ buildscript {
         retrofit_version = '2.11.0'
         glide_version = '4.16.0'
         pagging_version = '3.3.2'
-        junit_version = '4.13.2'
-        expresso_version = '3.6.1'
         material_version = '1.12.0'
         core_ktx_version = '1.13.1'
         constraint_layout_version = '2.1.4'
         app_comppat_version = '1.7.0'
+        coroutine_version = '1.9.0'
         // Versions of android compiles
         minSdkVersion = 26
         compileSdkVersion = 35
@@ -26,18 +25,23 @@ buildscript {
         // App versions attributes
         versionCode = 1
         versionName = "1.0"
+        // Tests
+        mockk_version = '1.13.12'
+        junit_version = '4.13.2'
+        expresso_version = '3.6.1'
+        archunit_version = '1.3.0'
     }
     dependencies {
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version")
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jacoco:org.jacoco.core:$jacoco_version"
+        classpath(libs.androidx.navigation.safe.args.gradle.plugin)
+        classpath libs.kotlin.gradle.plugin
+        classpath libs.org.jacoco.core
     }
     repositories {
         mavenCentral()
     }
 }
 plugins {
-    id "com.android.application" version '8.7.1' apply false
-    id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
-    id 'org.jetbrains.kotlin.plugin.compose' version "$kotlin_version" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
 }

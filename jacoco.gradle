@@ -14,14 +14,18 @@ project.afterEvaluate {
     }
 }
 
-ext.excludes = ['**/databinding/*Binding.*',
+ext.excludes = ['**/databinding',
                 '**/R.class',
                 '**/R$*.class',
                 '**/BuildConfig.*',
                 '**/Manifest*.*',
                 '**/*Test*.*',
                 'android/**/*.*',
+                //Android
                 '**/ui',
+                '**/data/model',
+                '**/domain/entity',
+                '**/generated',
                 // butterKnife
                 '**/*$ViewInjector*.*',
                 '**/*$ViewBinder*.*',
@@ -53,8 +57,7 @@ ext.excludes = ['**/databinding/*Binding.*',
                 '**/*MembersInjector*.*',
                 '**/*_MembersInjector.class',
                 '**/*_Factory*.*',
-                '**/*_Provide*Factory*.*',
-                '**/*Extensions*.*']
+                '**/*_Provide*Factory*.*']
 
 def createVariantCoverage(variant) {
     def variantName = variant.name
@@ -105,7 +108,7 @@ def createVariantCoverage(variant) {
                 limit {
                     counter = 'LINE'
                     value = 'COVEREDRATIO'
-                    minimum = 0.00
+                    minimum = 0.15
                 }
             }
         }
