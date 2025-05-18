@@ -3,20 +3,21 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.androidx.navigation.safeargs)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.compose.compiler)
+
 }
 
 apply from: '../jacoco.gradle'
 
 android {
     namespace 'br.com.lucolimac.pokedex'
-    compileSdk 35
+    compileSdk 36
     defaultConfig {
         applicationId "br.com.lucolimac.pokedex"
         minSdk 26
-        targetSdkVersion 35
+        targetSdk 36
         versionCode 1
-        versionName "1.0"
+        versionName '1.0.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,9 +45,9 @@ android {
         dataBinding true
         compose true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.5.8'
-    }
+//    composeOptions {
+//        kotlinCompilerExtensionVersion '1.5.8'
+//    }
 }
 dependencies {
     implementation(project(":attributes"))

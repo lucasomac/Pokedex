@@ -1,18 +1,20 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.compose.compiler)
+
 }
 
 android {
     namespace 'br.com.lucolimac.pokedex.attribute'
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         minSdk 26
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        targetSdk 36
     }
 
     buildTypes {
