@@ -4,10 +4,10 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.androidx.navigation.safeargs)
     alias(libs.plugins.compose.compiler)
-
+    alias(libs.plugins.kover)
 }
 
-apply from: '../jacoco.gradle'
+//apply from: '../jacoco.gradle'
 
 android {
     namespace 'br.com.lucolimac.pokedex'
@@ -28,8 +28,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            enableUnitTestCoverage true
-            enableAndroidTestCoverage true
+//            enableUnitTestCoverage true
+//            enableAndroidTestCoverage true
+        }
+    }
+    kover {
+        reports {
+            filters {
+                excludes {
+                    // exclusion rules - classes to exclude from report
+                    packages("androidx.compose.ui.tooling.preview.Preview", "androidx.databinding", "br.com.lucolimac.pokedex.databinding")
+                }
+                includes {
+                    // inclusion rules - classes only those that will be present in reports
+                }
+            }
+            verify {
+                rule {
+                    minBound(25)
+                }
+            }
         }
     }
     compileOptions {
@@ -45,9 +63,6 @@ android {
         dataBinding true
         compose true
     }
-//    composeOptions {
-//        kotlinCompilerExtensionVersion '1.5.8'
-//    }
 }
 dependencies {
     implementation(project(":attributes"))
