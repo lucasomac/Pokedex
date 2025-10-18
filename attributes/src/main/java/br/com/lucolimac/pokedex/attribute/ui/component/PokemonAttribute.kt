@@ -43,7 +43,7 @@ fun PokemonAttribute(attribute: Attribute) {
 fun PokemonAttributePreview() {
     PokemonAttribute(
         Attribute(
-            com.google.android.material.R.drawable.abc_ic_menu_overflow_material,
+            com.google.android.material.R.drawable.avd_hide_password,
             "65",
             "Height"
         )
