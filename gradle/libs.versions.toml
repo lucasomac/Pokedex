@@ -21,7 +21,7 @@ pagingRuntimeKtx = "3.3.6"
 junit = "4.13.2"
 archunitJunit4 = "1.4.0"
 mockkAndroid = "1.13.17"
-agp = "9.0.1"
+agp = "9.2.1"
 kotlin = "2.2.10"
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
