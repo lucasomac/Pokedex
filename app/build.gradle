@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace 'br.com.lucolimac.pokedex'
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId "br.com.lucolimac.pokedex"
         minSdk 26
@@ -34,8 +34,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
-    kotlinOptions {
-        jvmTarget = '21'
+    // Use Kotlin JVM toolchain instead of the deprecated kotlinOptions.jvmTarget
+    kotlin {
+        jvmToolchain(21)
     }
     buildFeatures {
         viewBinding true
@@ -45,6 +46,13 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.8'
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE.md"
+        }
     }
 }
 dependencies {

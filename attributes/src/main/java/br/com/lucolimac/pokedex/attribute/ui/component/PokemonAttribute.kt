@@ -43,7 +43,7 @@ fun PokemonAttribute(attribute: Attribute) {
 fun PokemonAttributePreview() {
     PokemonAttribute(
         Attribute(
-            com.google.android.material.R.drawable.abc_ic_menu_overflow_material,
+            com.google.android.material.R.drawable.m3_split_button_chevron_avd,
             "65",
             "Height"
         )

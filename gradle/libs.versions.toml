@@ -1,28 +1,28 @@
 [versions]
 #Libraries versions
-appcompat = "1.7.0"
+appcompat = "1.7.1"
 constraintlayout = "2.2.1"
-converterGson = "2.11.0"
-coreKtx = "1.15.0"
-espressoCore = "3.6.1"
-glide = "4.16.0"
-gson = "2.12.1"
-androidxJunit = "1.2.1"
-koinAndroid = "4.0.2"
-retrofit = "2.11.0"
-material = "1.12.0"
-composeBoom = '2025.03.00'
-coroutine = '1.10.1'
-jacoco = '0.8.12'
-navigation = "2.9.6"
-okhttp = '4.12.0'
-pagingRuntimeKtx = "3.3.6"
+converterGson = "3.0.0"
+coreKtx = "1.19.0"
+espressoCore = "3.7.0"
+glide = "5.0.7"
+gson = "2.14.0"
+androidxJunit = "1.3.0"
+koinAndroid = "4.2.1"
+retrofit = "3.0.0"
+material = "1.14.0"
+composeBoom = '2026.05.01'
+coroutine = '1.11.0'
+jacoco = '0.8.15'
+navigation = "2.9.8"
+okhttp = '5.3.2'
+pagingRuntimeKtx = "3.5.0"
 ## Tests
 junit = "4.13.2"
-archunitJunit4 = "1.4.0"
-mockkAndroid = "1.13.17"
+archunitJunit4 = "1.4.2"
+mockkAndroid = "1.14.11"
 agp = "9.2.1"
-kotlin = "2.2.10"
+kotlin = "2.4.0"
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-compose-material3-material3 = { module = "androidx.compose.material3:material3" }
