@@ -23,10 +23,14 @@ Always check if shared UI components belong in `:attributes` before adding to `:
 
 ### Core Layers (in `/app/src/main/java/br/com/lucolimac/pokedex/`)
 
+- **`core/`**: Shared utilities
+  - `Extensions.kt` - Kotlin extension functions (e.g., `Int.metricalConversion()`)
+
 - **`domain/`**: Pure Kotlin, no Android dependencies
   - `entity/` - Data models (Pokedex, Pokemon)
   - `repository/` - Repository interfaces (contracts)
   - `usecase/` - Business logic (PokedexUseCase, PokemonUseCase)
+  - `util/` - Constants and utility classes (e.g., `Constants.kt`, `Result.kt`)
   - `data/` - Pagination sources (PokedexPagingSource)
 
 - **`data/`**: Android-aware data layer
@@ -45,6 +49,8 @@ Always check if shared UI components belong in `:attributes` before adding to `:
   - `presentation/activity/` - Single MainActivity with Navigation Component
   - `adapter/` - RecyclerView adapters (PokemonListAdapter)
   - `component/` - Shared UI components (Separator, BubblePokemonTypeAdapter)
+
+**Application Setup**: `PokedexApplication.kt` initializes Koin on startup
 
 ## Dependency Injection (Koin)
 
@@ -124,9 +130,10 @@ binding.viewModel = this@PokedexFragment.viewModel  // Data binding
 ## Build & Gradle Configuration
 
 - **Gradle version**: 9.5.1 (uses settings.gradle plugins)
+- **AGP (Android Gradle Plugin)**: 9.2.1
 - **JDK**: Java 21 (sourceCompatibility/targetCompatibility)
-- **Kotlin**: 2.1.0 with Compose compiler plugin
-- **Min/Compile/Target SDK**: 26/35/35
+- **Kotlin**: 2.4.0 with Compose compiler plugin
+- **Min/Compile/Target SDK**: 26/37/37
 
 **Key build configurations**:
 - Data binding: Enabled for XML layouts
@@ -139,13 +146,14 @@ binding.viewModel = this@PokedexFragment.viewModel  // Data binding
 
 All versions in `gradle/libs.versions.toml` (TOML catalog):
 
-- **Retrofit**: 2.11.0 (+ Gson converter)
-- **OkHttp**: 4.12.0 (+ logging interceptor)
-- **Navigation**: 2.8.9 (+ Safe Args Gradle plugin)
-- **Koin**: 4.0.2 (DI framework)
-- **Paging**: 3.3.6
-- **Coroutines**: 1.10.1
-- **Jetpack Compose**: BOM 2025.03.00
+- **Retrofit**: 3.0.0 (+ Gson converter)
+- **OkHttp**: 5.3.2 (+ logging interceptor)
+- **Navigation**: 2.9.8 (+ Safe Args Gradle plugin)
+- **Koin**: 4.2.1 (DI framework)
+- **Paging**: 3.5.0
+- **Coroutines**: 1.11.0
+- **Jetpack Compose**: BOM 2026.05.01
+- **Glide**: 5.0.7 (image loading)
 
 **Always use version refs from TOML, not hardcoded versions.**
 
@@ -154,9 +162,10 @@ All versions in `gradle/libs.versions.toml` (TOML catalog):
 1. **Package naming**: `br.com.lucolimac.pokedex.{layer}.{feature}`
 2. **Class visibility**: Classes are `internal` to prevent accidental external dependency
 3. **Constants location**: `domain/util/Constants.kt` (e.g., `DEFAULT_SIZE_CONTENT_PAGE`, `START_PAGE_INDEX`, `POKE_API_HOST`)
-4. **String resources**: All hardcoded strings in `res/values/strings.xml`
-5. **Fragment inheritance**: Use `PokedexGenericFragment<Binding>` for consistent lifecycle handling
-6. **Callback pattern**: UI clicks implement interfaces (e.g., `PokedexOnClickListener`) instead of local listeners
+4. **Utility extensions**: `core/Extensions.kt` for Kotlin extension functions
+5. **String resources**: All hardcoded strings in `res/values/strings.xml`
+6. **Fragment inheritance**: Use `PokedexGenericFragment<Binding>` for consistent lifecycle handling
+7. **Callback pattern**: UI clicks implement interfaces (e.g., `PokedexOnClickListener`) instead of local listeners
 
 ## Common Development Tasks
 

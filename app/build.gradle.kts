@@ -1,7 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    // Kotlin is provided by AGP's built-in Kotlin (AGP 9+). Do not apply `org.jetbrains.kotlin.android` here.
-    alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.androidx.navigation.safeargs)
     alias(libs.plugins.kotlin.compose)
 }
@@ -91,8 +89,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)
-    androidTestImplementation(libs.mockk.android)
-    androidTestImplementation(libs.mockk.agent)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.archunit.junit4)
 }

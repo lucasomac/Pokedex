@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    // Kotlin is provided by AGP's built-in Kotlin (AGP 9+), no need to apply `org.jetbrains.kotlin.android` here
     alias(libs.plugins.kotlin.compose)
 }
 
